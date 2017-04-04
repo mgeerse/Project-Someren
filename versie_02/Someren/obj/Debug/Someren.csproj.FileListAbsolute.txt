@@ -1,0 +1,9 @@
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\bin\Debug\Someren.exe.config
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\bin\Debug\Someren.exe
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\bin\Debug\Someren.pdb
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\obj\Debug\Someren.csprojResolveAssemblyReference.cache
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\obj\Debug\Someren.Someren_Form.resources
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\obj\Debug\Someren.Properties.Resources.resources
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\obj\Debug\Someren.csproj.GenerateResource.Cache
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\obj\Debug\Someren.exe
+C:\Users\Rima\Desktop\Project database\SOMEREN\versie_02\Someren\obj\Debug\Someren.pdb
