@@ -104,6 +104,39 @@ namespace Someren
             return docenten_lijst;
         }
 
-        // public void 
+        public static List<SomerenModel.Drankvoorraad> DB_GetDrankvoorraad()
+        {
+            SqlConnection connection = openConnectieDB();
+            List<SomerenModel.Drankvoorraad> dranken_lijst = new List<SomerenModel.Drankvoorraad>();
+
+            StringBuilder sb = new StringBuilder();
+            // schrijf hier een query om te zorgen dat er een lijst met studenten wordt getoond
+            sb.Append("SELECT * FROM dbo.A5_Voorraad WHERE Voorraad > 1 AND Prijs > 1 AND Naam<>'Water' AND Naam!='Sinas' AND Naam!='Kersensap' ORDER BY Voorraad, Prijs, Aantal_Verkocht;");
+
+            String sql = sb.ToString();
+
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Prepare();
+
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int DrankId = reader.GetInt32(0);
+                string Naam = reader.GetString(1);
+                decimal Prijs = reader.GetDecimal(2);
+                int Aantal_Verkocht = reader.GetInt32(3);
+                int Voorraad = reader.GetInt32(4);
+
+                SomerenModel.Drankvoorraad Drankvoorraad = new SomerenModel.Drankvoorraad();
+                Drankvoorraad.setId(DrankId);
+                Drankvoorraad.setNaam(Naam);
+                Drankvoorraad.setPrijs(Prijs);
+                Drankvoorraad.setAantal_Verkocht(Aantal_Verkocht);
+                Drankvoorraad.setVoorraad(Voorraad);
+                dranken_lijst.Add(Drankvoorraad);
+            }
+
+            return dranken_lijst;
+        }
     }
 }

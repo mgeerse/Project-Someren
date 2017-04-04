@@ -1,0 +1,1 @@
+﻿SELECT * FROM dbo.A5_Voorraad WHERE Voorraad > 1 OR Prijs > 1 OR Naam!='Water' OR Naam!='Sinas' OR Naam!='Kersensap' ORDER BY Voorraad, Prijs, Aantal_Verkocht;

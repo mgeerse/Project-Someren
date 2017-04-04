@@ -147,5 +147,12 @@ namespace Someren
             this.groupBox1.Text = "Docenten";
             this.panel1.Controls.Add(SomerenUI.showDocent());
         }
+
+        private void drankvoorraadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            this.groupBox1.Text = "Bardienst";
+            this.panel1.Controls.Add(SomerenUI.showDrankvoorraad());
+        }
     }
 }
