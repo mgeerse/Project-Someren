@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Someren.Properties;
+using System.Drawing;
 
 namespace Someren
 {
@@ -63,41 +64,46 @@ namespace Someren
         public static Control showDrankvoorraad()
         {
             List<SomerenModel.Drankvoorraad> dl = SomerenDB.DB_GetDrankvoorraad();
-            ListViewItem lv = new ListViewItem();
-            ListView c = new ListView();
 
+            ListViewItem lv = new ListViewItem();
+            ListView listView1 = new ListView();
+
+            listView1.Items.Add("Naam");
+            listView1.Items.Add("ID");
+            listView1.Items.Add("Prijs");
+            listView1.Items.Add("Verkocht");
+            listView1.Items.Add("Voorraad");
             foreach (var item in dl)
             {
-                SomerenModel.Drankvoorraad Drankvoorraad = new SomerenModel.Drankvoorraad();             
+                SomerenModel.Drankvoorraad Drankvoorraad = new SomerenModel.Drankvoorraad();
                 Drankvoorraad.setId(item.getId());
                 Drankvoorraad.setNaam(item.getNaam());
                 Drankvoorraad.setPrijs(item.getPrijs());
                 Drankvoorraad.setAantal_Verkocht(item.getAantal_Verkocht());
                 Drankvoorraad.setVoorraad(item.getVoorraad());
 
-                lv.SubItems.Add(Drankvoorraad.getId().ToString());
-                //lv.SubItems.Add(Drankvoorraad.getNaam());
-                //lv.SubItems.Add(Drankvoorraad.getPrijs().ToString());
-                //lv.SubItems.Add(Drankvoorraad.getAantal_Verkocht().ToString());
-                //lv.SubItems.Add(Drankvoorraad.getVoorraad().ToString());
+                listView1.Items.Add(Drankvoorraad.getNaam());
+                listView1.Items.Add(Drankvoorraad.getId().ToString());
+                listView1.Items.Add(Drankvoorraad.getPrijs().ToString());
+                listView1.Items.Add(Drankvoorraad.getAantal_Verkocht().ToString());
+                listView1.Items.Add(Drankvoorraad.getVoorraad().ToString());
 
-                c.Items.Add(Drankvoorraad.getNaam());
-                c.Items.Add(Drankvoorraad.getId().ToString());
-                c.Items.Add(Drankvoorraad.getPrijs().ToString());
-                c.Items.Add(Drankvoorraad.getAantal_Verkocht().ToString());
-                c.Items.Add(Drankvoorraad.getVoorraad().ToString());
-
+                if (item.getVoorraad() < 10)
+                {
+                    foreach (ListViewItem li in listView1.Items)
+                    {                        
+                            li.ForeColor = Color.Red;
+                    }
+                }
             }
-
 
             int aantal = dl.Count();
 
-            c.Height = 1000;
-            c.Width = 250;
+            listView1.Height = 1000;
+            listView1.Width = 250;
 
-            return c;
+            return listView1;
         }
-
 
         public static Control addUILabel(string text)
         {
