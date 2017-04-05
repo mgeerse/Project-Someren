@@ -15,74 +15,6 @@ namespace Someren
         public static Control showStudents()
         {
             List<SomerenModel.Student> sl = SomerenDB.DB_gettudents();
-            ListViewItem li = new ListViewItem();
-            ListView c = new ListView();
-
-            foreach (var item in sl)
-            {
-                SomerenModel.Student Student = new SomerenModel.Student();
-                Student.setNaam(item.getNaam());
-
-                li.SubItems.Add(Student.getNaam());
-                li.SubItems.Add(Student.getId().ToString());
-
-                c.Items.Add(Student.getNaam());
-
-            }
-            c.Items.Add(li);
-
-
-            int aantal = sl.Count();
-
-            c.Height = 370;
-
-            return c;
-        }
-
-        public static Control showDocent()
-        {
-            List<SomerenModel.Docent> dl = SomerenDB.DB_GetDocent();
-            ListViewItem li = new ListViewItem();
-            ListView c = new ListView();
-
-            foreach (var item in dl)
-            {
-                SomerenModel.Student Docent = new SomerenModel.Student();
-                Docent.setNaam(item.getNaam());
-
-                li.SubItems.Add(Docent.getNaam());
-                li.SubItems.Add(Docent.getId().ToString());
-
-                c.Items.Add(Docent.getNaam());
-                c.Items.Add(li);
-            }
-            int aantal = dl.Count();
-
-            c.Height = 370;
-
-            return c;
-        }
-
-        public static Control kassaShowDrank()
-        {
-            List<SomerenModel.Drank> dl = SomerenDB.DB_GetDrank();
-            ListBox Clb = new ListBox();
-            Clb.Left = 200;
-            Clb.Width = 200;
-            Clb.Height = 375;
-
-            int index = 0;
-
-            foreach (var item in dl)
-            {
-                Clb.Items.Insert(index, item.getNaam());
-                index++;
-            }
-            return Clb;
-        }
-        public static Control kassaShowStudenten()
-        {
-            List<SomerenModel.Student> sl = SomerenDB.DB_gettudents();
             ListBox studenten = new ListBox();
 
             studenten.Width = 200;
@@ -90,10 +22,55 @@ namespace Someren
             foreach (var item in sl)
             {
                 studenten.Items.Add(item.getNaam());
+            }
+            return studenten;
+        }
 
+        public static Control showDocent()
+        {
+            List<SomerenModel.Docent> dl = SomerenDB.DB_GetDocent();
+            ListBox docenten = new ListBox();
+
+            docenten.Width = 200;
+            docenten.Height = 375;
+            foreach (var item in dl)
+            {
+                docenten.Items.Add(item.getNaam());
+            }
+            return docenten;
+        }
+
+        public static Control kassaShowDrank()
+        {
+            List<SomerenModel.Drank> dl = SomerenDB.DB_GetDrank();
+            ListView Dranken = new ListView();
+            Dranken.Left = 200;
+            Dranken.Width = 200;
+            Dranken.Height = 375;
+            Dranken.CheckBoxes = true;
+            int index = 0;
+
+            foreach (var item in dl)
+            {
+                Dranken.Items.Insert(index, item.getNaam());
+                index++;
+            }
+            return Dranken;
+        }
+        public static Control kassaShowStudenten()
+        {
+            List<SomerenModel.Student> sl = SomerenDB.DB_gettudents();
+            ListView Studenten = new ListView();
+            Studenten.Name = "Studenten";
+            Studenten.Width = 200;
+            Studenten.Height = 375;
+            Studenten.CheckBoxes = true;
+            foreach (var item in sl)
+            {
+                Studenten.Items.Add(item.getNaam());
             }
 
-            return studenten;
+            return Studenten;
         }
 
         public static Control kassaShowAantal()
@@ -124,9 +101,33 @@ namespace Someren
 
         public static void afrekenenHandler(object sender, EventArgs e)
         {
-            //afrekeken
+            ////MessageBox.Show("afgerekend!");
+            //Control[] c = Someren_Form.Instance.panel1.Controls.Find("StudentenLB", true);
+
+            ////ListBox[] lb = (ListBox[])c;
 
             
+
+            ////afrekeken
+            //foreach (ListBox item in c)
+            //{
+            //    MessageBox.Show(item.Name);
+            //}
+
+            List<string> Geselecteerd = new List<string>();
+            string[] strValues;
+            foreach (ListView c in Someren_Form.Instance.panel1.Controls.Find("Studenten", true))
+            {
+                ListView.CheckedListViewItemCollection vc = c.CheckedItems;
+                strValues = new string[c.CheckedItems.Count];
+
+                for (int i = 0; i < vc.Count; i++)
+                {
+                    strValues[i] = c.Items[vc[i].Index].SubItems[0].Text;
+                }
+            }
+
+
         }
 
         public static Control kassaShowLabel()
@@ -145,5 +146,20 @@ namespace Someren
             l.Text = text;
             return l;
         }
+
+        public static Control omzetBeginKalender()
+        {
+            MonthCalendar kalender = new MonthCalendar();
+
+            return kalender;
+        }
+
+        public static Control omzetEindKalender()
+        {
+            MonthCalendar kalender = new MonthCalendar();
+            kalender.Left = 200;
+            return kalender;
+        }
+
     }
 }

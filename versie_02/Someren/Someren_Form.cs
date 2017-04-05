@@ -12,7 +12,7 @@ namespace Someren
 {
     public partial class Someren_Form : Form
     {
-       
+
         private static Someren_Form instance;
 
         public Someren_Form() { InitializeComponent(); }
@@ -43,7 +43,7 @@ namespace Someren
         private void showDashboard()
         {
             panel1.Controls.Clear();
-            
+
             groupBox1.Text = "TODO LIJST";
             Label l = new Label();
             l.Height = 500;
@@ -62,7 +62,7 @@ namespace Someren
             {
                 Application.Exit();
             }
-           
+
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
@@ -72,15 +72,15 @@ namespace Someren
 
         private void overSomerenAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             panel1.Controls.Clear();
 
             groupBox1.Text = "TODO LIJST";
             Label l = new Label();
             l.Height = 500;
             l.Text = "Deze applicatie is ontwikkeld voor 1.3 Project Databases, opleiding Informatica, Hogeschool Inholland Haarlem";
-            
+
             panel1.Controls.Add(l);
         }
 
@@ -114,7 +114,7 @@ namespace Someren
             this.panel1.Controls.Clear();
             this.groupBox1.Text = "Studenten";
             this.panel1.Controls.Add(SomerenUI.showStudents());
-           
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -166,7 +166,67 @@ namespace Someren
 
         public void button1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void omzetrapportageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            this.groupBox1.Text = "Omzetrapportage";
+            this.panel1.Controls.Add(SomerenUI.omzetBeginKalender());
+            this.panel1.Controls.Add(SomerenUI.omzetEindKalender());
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show("geklikt!");
+            //Control[] c = panel1.Controls.Find("Studenten", true);
+            //try
+            //{
+            //    ListView naam = (ListView)c[0];
+            //    ListView drank = (ListView)c[1];
+
+            //    foreach (var item in naam)
+            //    {
+            //        string[] xfx = item;
+            //    }
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        MessageBox.Show("Je mag maar 1 ding selecteren!: "+ e);
+            //    }
+
+
+
+
+            //MessageBox.Show(naam.SelectedItems.ToString());
+            // c.
+
             
+            
+                List<string> dingen = new List<string>();
+
+                foreach (ListView c in panel1.Controls)
+                {
+                    ListView.CheckedListViewItemCollection vc = c.CheckedItems;
+
+                    string[] strValues = new string[c.CheckedItems.Count];
+
+                    for (int i = 0; i < vc.Count; i++)
+                    {
+                        strValues[i] = c.Items[vc[i].Index].SubItems[0].Text;
+                        dingen.Add(strValues[i].ToString());
+                    }
+                }
+                MessageBox.Show(dingen.Count.ToString());
+                foreach (var item in dingen)
+                {
+                    
+                }
+            }
+            
+            //MessageBox.Show("einde");
         }
     }
-}

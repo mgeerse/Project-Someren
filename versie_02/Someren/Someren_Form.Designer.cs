@@ -61,6 +61,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -175,6 +176,7 @@
             this.omzetrapportageToolStripMenuItem.Name = "omzetrapportageToolStripMenuItem";
             this.omzetrapportageToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.omzetrapportageToolStripMenuItem.Text = "Omzetrapportage";
+            this.omzetrapportageToolStripMenuItem.Click += new System.EventHandler(this.omzetrapportageToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -331,11 +333,22 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(13, 20);
             this.toolStripStatusLabel2.Text = " ";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(797, 270);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(305, 91);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Afrekenen";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Someren_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1119, 553);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
@@ -391,6 +404,7 @@
         private System.Windows.Forms.ToolStripMenuItem docentenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toonDocentenToolStripMenuItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
