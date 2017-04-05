@@ -163,6 +163,7 @@
             this.drankvoorraadToolStripMenuItem.Name = "drankvoorraadToolStripMenuItem";
             this.drankvoorraadToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.drankvoorraadToolStripMenuItem.Text = "Drankvoorraad";
+            this.drankvoorraadToolStripMenuItem.Click += new System.EventHandler(this.drankvoorraadToolStripMenuItem_Click_1);
             // 
             // kassaToolStripMenuItem
             // 

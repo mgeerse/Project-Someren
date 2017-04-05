@@ -169,6 +169,11 @@ namespace Someren
 
         }
 
+        private void drankvoorraadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         private void omzetrapportageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.panel1.Controls.Clear();
@@ -226,7 +231,14 @@ namespace Someren
                     
                 }
             }
-            
-            //MessageBox.Show("einde");
+
+        private void drankvoorraadToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            this.groupBox1.Text = "Bardienst";
+            this.panel1.Controls.Add(SomerenUI.showDrankvoorraad());
         }
+
+        //MessageBox.Show("einde");
+    }
     }

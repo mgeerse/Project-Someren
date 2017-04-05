@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Someren.Properties;
+using System.Drawing;
 
 namespace Someren
 {
@@ -138,6 +139,51 @@ namespace Someren
             label.Left = 405;
 
             return label;
+        }
+
+        public static Control showDrankvoorraad()
+        {
+            List<SomerenModel.Drankvoorraad> dl = SomerenDB.DB_GetDrankvoorraad();
+            ListView listView1 = new ListView();
+
+            listView1.View = View.Details;
+            listView1.GridLines = true;
+            listView1.FullRowSelect = true;
+            listView1.MultiSelect = false;
+
+            listView1.Columns.Add("Naam");
+            listView1.Columns.Add("ID");
+            listView1.Columns.Add("Prijs");
+            listView1.Columns.Add("Verkocht");
+            listView1.Columns.Add("Voorraad");
+
+            foreach (var item in dl)
+            {
+                SomerenModel.Drankvoorraad Drankvoorraad = new SomerenModel.Drankvoorraad();
+                ListViewItem lvi = new ListViewItem();
+
+                lvi.Text = item.getNaam();
+                lvi.SubItems.Add(item.getId().ToString());
+                lvi.SubItems.Add(item.getPrijs().ToString());
+                lvi.SubItems.Add(item.getAantal_Verkocht().ToString());
+                lvi.SubItems.Add(item.getVoorraad().ToString());
+                listView1.Items.Add(lvi);
+
+                if (item.getVoorraad() < 10)
+                {
+                    foreach (ListViewItem li in listView1.Items)
+                    {
+                        li.ForeColor = Color.Red;
+                    }
+                }
+            }
+
+            int aantal = dl.Count();
+
+            listView1.Height = 1000;
+            listView1.Width = 500;
+
+            return listView1;
         }
 
         public static Control addUILabel(string text)

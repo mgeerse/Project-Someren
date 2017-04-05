@@ -108,6 +108,65 @@ namespace Someren
                 return verkocht;
             }
         }
+        public class Drankvoorraad
+        {
+            int Id;
+            string naam;
+            decimal prijs;
+            int aantal_verkocht;
+            int voorraad;
+
+            public void setNaam(string naamDrank)
+            {
+                naam = naamDrank;
+            }
+
+            public void setId(int DrankId)
+            {
+                Id = DrankId;
+            }
+
+            public void setPrijs(decimal Prijs)
+            {
+                prijs = Prijs;
+            }
+
+            public void setAantal_Verkocht(int Aantal_Verkocht)
+            {
+                aantal_verkocht = Aantal_Verkocht;
+            }
+
+            public void setVoorraad(int Voorraad)
+            {
+                voorraad = Voorraad;
+            }
+
+            public string getNaam()
+            {
+                return naam;
+            }
+
+            public int getId()
+            {
+                return Id;
+            }
+
+            public decimal getPrijs()
+            {
+                return prijs;
+            }
+
+            public int getAantal_Verkocht()
+            {
+                return aantal_verkocht;
+            }
+
+            public int getVoorraad()
+            {
+                return voorraad;
+            }
+
+        }
 
         public class StudentList
         {
@@ -139,18 +198,17 @@ namespace Someren
 
         public class DrankList
         {
-            List<SomerenModel.Drank> dl = new List<SomerenModel.Drank>();
+            List<SomerenModel.Drankvoorraad> dl = new List<SomerenModel.Drankvoorraad>();
 
-            public void addList(SomerenModel.Drank d)
+            public void addList(SomerenModel.Drankvoorraad d)
             {
                 dl.Add(d);
             }
 
-            public List<SomerenModel.Drank> getList()
+            public List<SomerenModel.Drankvoorraad> getList()
             {
                 return dl;
             }
         }
-
     }
 }
