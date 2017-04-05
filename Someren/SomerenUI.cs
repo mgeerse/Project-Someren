@@ -64,29 +64,30 @@ namespace Someren
         public static Control showDrankvoorraad()
         {
             List<SomerenModel.Drankvoorraad> dl = SomerenDB.DB_GetDrankvoorraad();
-
-            ListViewItem lv = new ListViewItem();
             ListView listView1 = new ListView();
 
-            listView1.Items.Add("Naam");
-            listView1.Items.Add("ID");
-            listView1.Items.Add("Prijs");
-            listView1.Items.Add("Verkocht");
-            listView1.Items.Add("Voorraad");
+            listView1.View = View.Details;
+            listView1.GridLines = true;
+            listView1.FullRowSelect = true;
+            listView1.MultiSelect = false;
+
+            listView1.Columns.Add("Naam");
+            listView1.Columns.Add("ID");
+            listView1.Columns.Add("Prijs");
+            listView1.Columns.Add("Verkocht");
+            listView1.Columns.Add("Voorraad");
+
             foreach (var item in dl)
             {
                 SomerenModel.Drankvoorraad Drankvoorraad = new SomerenModel.Drankvoorraad();
-                Drankvoorraad.setId(item.getId());
-                Drankvoorraad.setNaam(item.getNaam());
-                Drankvoorraad.setPrijs(item.getPrijs());
-                Drankvoorraad.setAantal_Verkocht(item.getAantal_Verkocht());
-                Drankvoorraad.setVoorraad(item.getVoorraad());
+                ListViewItem lvi = new ListViewItem();
 
-                listView1.Items.Add(Drankvoorraad.getNaam());
-                listView1.Items.Add(Drankvoorraad.getId().ToString());
-                listView1.Items.Add(Drankvoorraad.getPrijs().ToString());
-                listView1.Items.Add(Drankvoorraad.getAantal_Verkocht().ToString());
-                listView1.Items.Add(Drankvoorraad.getVoorraad().ToString());
+                lvi.Text = item.getNaam();
+                lvi.SubItems.Add(item.getId().ToString());
+                lvi.SubItems.Add(item.getPrijs().ToString());
+                lvi.SubItems.Add(item.getAantal_Verkocht().ToString());
+                lvi.SubItems.Add(item.getVoorraad().ToString());
+                listView1.Items.Add(lvi);
 
                 if (item.getVoorraad() < 10)
                 {
@@ -100,10 +101,51 @@ namespace Someren
             int aantal = dl.Count();
 
             listView1.Height = 1000;
-            listView1.Width = 250;
+            listView1.Width = 500;
 
             return listView1;
         }
+
+        //public static Control showactiviteitenlijst()
+        //{
+        //    List<SomerenModel.activiteitenlijst> dl = SomerenDB.DB_Getactiviteitenlijst();
+        //    ListView listView1 = new ListView();
+            
+        //    listView1.View = View.Details;
+        //    listView1.GridLines = true;
+        //    listView1.FullRowSelect = true;
+        //    listView1.MultiSelect = false;
+
+        //    listView1.Columns.Add("ID", 70);
+        //    listView1.Columns.Add("Omschrijving", 70);
+        //    listView1.Columns.Add("Studenten", 70);
+        //    listView1.Columns.Add("Begeleiders", 70);
+
+        //    foreach (var item in dl)
+        //    {
+        //        SomerenModel.activiteitenlijst activiteitenlijst = new SomerenModel.activiteitenlijst();
+        //        ListViewItem lvi = new ListViewItem();
+        //        lvi.Text = item.getId().ToString();
+        //        lvi.SubItems.Add(item.getOmschrijving());
+        //        lvi.SubItems.Add(item.getaantalStudenten().ToString());
+        //        lvi.SubItems.Add(item.getaantalBegeleiders().ToString());
+        //        listView1.Items.Add(lvi);
+        //    }
+
+        //    int aantal = dl.Count();
+
+        //    listView1.Height = 1000;
+        //    listView1.Width = 500;
+
+        //    return listView1;
+        //}
+
+        //public static Control activiteittoevoegen()
+        //{
+            
+
+        //    return ;
+        //}
 
         public static Control addUILabel(string text)
         {

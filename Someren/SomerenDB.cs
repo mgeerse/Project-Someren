@@ -110,7 +110,7 @@ namespace Someren
             List<SomerenModel.Drankvoorraad> dranken_lijst = new List<SomerenModel.Drankvoorraad>();
 
             StringBuilder sb = new StringBuilder();
-            // schrijf hier een query om te zorgen dat er een lijst met studenten wordt getoond
+
             sb.Append("SELECT * FROM dbo.A5_Voorraad WHERE Voorraad > 1 AND Prijs > 1 AND Naam<>'Water' AND Naam!='Sinas' AND Naam!='Kersensap' ORDER BY Voorraad, Prijs, Aantal_Verkocht;");
 
             String sql = sb.ToString();
@@ -138,5 +138,38 @@ namespace Someren
 
             return dranken_lijst;
         }
+
+        //public static List<SomerenModel.activiteitenlijst> DB_Getactiviteitenlijst()
+        //{
+        //    SqlConnection connection = openConnectieDB();
+        //    List<SomerenModel.activiteitenlijst> activiteiten_lijst = new List<SomerenModel.activiteitenlijst>();
+
+        //    StringBuilder sb = new StringBuilder();
+
+        //    sb.Append("SELECT * FROM dbo.A5_Activiteit;");
+
+        //    String sql = sb.ToString();
+
+        //    SqlCommand command = new SqlCommand(sql, connection);
+        //    command.Prepare();
+
+        //    SqlDataReader reader = command.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        int ActiviteitID = reader.GetInt32(0);
+        //        string Omschrijving = reader.GetString(1);
+        //        int aantalStudenten = reader.GetInt32(2);
+        //        int aantalBegeleiders = reader.GetInt32(3);
+
+        //        SomerenModel.activiteitenlijst activiteitenlijst = new SomerenModel.activiteitenlijst();
+        //        activiteitenlijst.setId(ActiviteitID);
+        //        activiteitenlijst.setOmschrijving(Omschrijving);
+        //        activiteitenlijst.setaantalStudenten(aantalStudenten);
+        //        activiteitenlijst.setaantalBegeleiders(aantalBegeleiders);
+        //        activiteiten_lijst.Add(activiteitenlijst);
+        //    }
+
+        //    return activiteiten_lijst;
+        //}
     }
 }
