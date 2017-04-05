@@ -114,7 +114,7 @@ namespace Someren
             this.panel1.Controls.Clear();
             this.groupBox1.Text = "Studenten";
             this.panel1.Controls.Add(SomerenUI.showStudents());
-            
+           
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -153,16 +153,18 @@ namespace Someren
             //kassa
             this.panel1.Controls.Clear();
             this.groupBox1.Text = "Kassa";
-            this.panel1.Controls.Add(SomerenUI.showDrank());
-            this.panel1.Controls.Add(SomerenUI.showStudents());
-
+            this.panel1.Controls.Add(SomerenUI.kassaShowDrank());
+            this.panel1.Controls.Add(SomerenUI.kassaShowStudenten());
+            this.panel1.Controls.Add(SomerenUI.kassaShowAfrekenen());
+            this.panel1.Controls.Add(SomerenUI.kassaShowAantal());
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
             
         }

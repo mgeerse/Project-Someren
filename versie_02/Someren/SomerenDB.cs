@@ -104,8 +104,6 @@ namespace Someren
             SqlConnection connection = openConnectieDB();
             List<SomerenModel.Drank> drank_lijst = new List<SomerenModel.Drank>();
 
-            
-
             StringBuilder sb = new StringBuilder();
             // schrijf hier een query om te zorgen dat er een lijst met studenten wordt getoond
             sb.Append("SELECT [Naam], [Prijs], [Voorraad], [Aantal_Verkocht], [DrankId] FROM [dbo].[A5_Voorraad]");
@@ -136,60 +134,35 @@ namespace Someren
             }
             return drank_lijst;
         }
+
         
-        public static List<SomerenModel.Drank> DB_UpdateDrank(int studentId)
+        public static int DB_GetStudentId(string naam)
         {
             SqlConnection connection = openConnectieDB();
-            connection.Open();
-            
-            string zoekenquery = "SELECT Aantal FROM A5_Verkopen WHERE @StudentId = StudentId AND @DrankId = Drank";
-            string insertquery = "INSERT INTO A5_Verkopen (Student, Datum, Drank, Aantal) VALUES (@StudentId, @Datum, @Drank, @Aantal)";
-            string updatequery = "UPDATE A5_Verkopen SET Aantal = @Aantal WHERE @Drank = Drank AND StudentId = @StudentId";
+            string query = "SELECT StudentId FROM A5_Student WHERE Naam = @Naam";
 
-            StringBuilder zq = new StringBuilder();
-            zq.Append(zoekenquery);
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@Naam", System.Data.SqlDbType.NVarChar).Value = naam;
+            command.Prepare();
+            return (int)command.ExecuteScalar();
+        }
 
-            StringBuilder iq = new StringBuilder();
-            iq.Append(insertquery);
-            StringBuilder uq = new StringBuilder();
-            uq.Append(updatequery);
 
-            String zksql = zq.ToString();
-            String insql = iq.ToString();
-            String upsql = uq.ToString();
+        public void DB_VerkoopDrank(int studentId, string drank)
+        {
+            SqlConnection connection = openConnectieDB();
 
-            SqlCommand zoekcommand = new SqlCommand(zksql, connection);
-            SqlCommand insertcommand = new SqlCommand(insql, connection);
-            SqlCommand updatecommand = new SqlCommand(upsql, connection);
-            zoekcommand.Prepare();
-            
-            updatecommand.Prepare();
+            string query = "INSERT INTO A5_Verkopen [Student], [Datum], [Drank], [Aantal] VALUES(@StudentId, @Datum, @Drank, Aantal = @Aantal)";
 
-            int aantal = (int)zoekcommand.ExecuteScalar();
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@StudentId", System.Data.SqlDbType.Int).Value = studentId;
+            command.Parameters.Add("Datum", System.Data.SqlDbType.DateTime).Value = System.Data.SqlDbType.DateTime;
+            command.Parameters.Add("Drank", System.Data.SqlDbType.NVarChar).Value = drank;
+            command.Prepare();
+            command.ExecuteNonQuery();
 
-            string drankidquery = ;
-            SqlCommand drankid = new SqlCommand("SELECT DrankId FROM A5_Voorraad WHERE Naam = @Naam", connection);
-            drankid.Parameters.Add("@Naam")
-            int drankid = drankid.ExecuteScalar();
-            if (aantal == 0 || aantal == null)
-            {
-                aantal = 1;
-                insertcommand.Parameters.Add("@Aantal", System.Data.SqlDbType.Int).Value = aantal;
-                insertcommand.Parameters.Add("@DrankId", System.Data.SqlDbType.Int). Value = ;
-                insertcommand.Prepare();
-                insertcommand.ExecuteNonQuery();
-            }
-            else if (aantal != 0 && aantal != null)
-            {
-                aantal++;
-                updatecommand.Parameters.Add("@Aantal", System.Data.SqlDbType.Int).Value = aantal;
 
-                updatecommand.Prepare();
-                updatecommand.ExecuteNonQuery();
-            }
-
-            return;
-
+            sluitConnectieDB(connection);
         }
 
         // public void 

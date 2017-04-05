@@ -27,7 +27,7 @@ namespace Someren
                 li.SubItems.Add(Student.getId().ToString());
 
                 c.Items.Add(Student.getNaam());
-              
+
             }
             c.Items.Add(li);
 
@@ -63,53 +63,81 @@ namespace Someren
             return c;
         }
 
-        public static Control showDrank()
+        public static Control kassaShowDrank()
         {
             List<SomerenModel.Drank> dl = SomerenDB.DB_GetDrank();
-            ListViewItem li = new ListViewItem();
-            ListView c = new ListView();
+            ListBox Clb = new ListBox();
+            Clb.Left = 200;
+            Clb.Width = 200;
+            Clb.Height = 375;
 
-            c.CheckBoxes = true;
-         
-            c.Left = 125;
-            c.Font = new System.Drawing.Font("Comic Sans MS", 10);
-            
+            int index = 0;
+
             foreach (var item in dl)
             {
-                SomerenModel.Drank Dranken = new SomerenModel.Drank();
-
-                var items = c.SelectedItems;
-                
-                Dranken.setNaam(item.getNaam());
-                //Dranken.setId(item.getId());
-                //Dranken.setPrijs(item.getPrijs());
-                //Dranken.setVerkocht(item.getVerkocht());
-                //Dranken.setVoorraad(item.getVoorraad());
-
-                li.SubItems.Add(Dranken.getId().ToString());
-                li.SubItems.Add(Dranken.getNaam());
-                li.SubItems.Add(Dranken.getPrijs().ToString());
-                li.SubItems.Add(Dranken.getVerkocht().ToString());
-                li.SubItems.Add(Dranken.getVoorraad().ToString());
-                
-                c.Items.Add(Dranken.getNaam());
-                //c.Items.Add(Dranken.getId().ToString());
-                //c.Items.Add(Dranken.getPrijs().ToString());
-                //c.Items.Add(Dranken.getVerkocht().ToString());
-                //c.Items.Add(Dranken.getVoorraad().ToString());
-                
-                //c.Items.Add(li);
+                Clb.Items.Insert(index, item.getNaam());
+                index++;
             }
-            int aantal = dl.Count();
+            return Clb;
+        }
+        public static Control kassaShowStudenten()
+        {
+            List<SomerenModel.Student> sl = SomerenDB.DB_gettudents();
+            ListBox studenten = new ListBox();
 
-            var items = c.SelectedItems;
+            studenten.Width = 200;
+            studenten.Height = 375;
+            foreach (var item in sl)
+            {
+                studenten.Items.Add(item.getNaam());
 
-            c.Height = 370;
-            
-            return c;
+            }
+
+            return studenten;
         }
 
+        public static Control kassaShowAantal()
+        {
+            NumericUpDown aantalDrankjes = new NumericUpDown();
 
+            aantalDrankjes.DecimalPlaces = 0;
+            aantalDrankjes.Minimum = 0;
+            aantalDrankjes.Maximum = 100;
+            aantalDrankjes.Left = 405;
+
+            return aantalDrankjes;
+        }
+
+        public static Control kassaShowAfrekenen()
+        {
+            Button button = new Button();
+            button.Click += new EventHandler(afrekenenHandler);
+            button.Text = "Afrekenen";
+            button.Left = 405;
+
+            return button;
+        }
+
+        public static void studentChecked(object sender, EventArgs e)
+        {
+        }
+
+        public static void afrekenenHandler(object sender, EventArgs e)
+        {
+            //afrekeken
+
+            
+        }
+
+        public static Control kassaShowLabel()
+        {
+            Label label = new Label();
+
+            label.Text = "Aantal drankjes:";
+            label.Left = 405;
+
+            return label;
+        }
 
         public static Control addUILabel(string text)
         {
@@ -119,4 +147,3 @@ namespace Someren
         }
     }
 }
- 
