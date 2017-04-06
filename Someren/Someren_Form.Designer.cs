@@ -39,14 +39,14 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.docentenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toonDocentenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoekKamersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bardienstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drankvoorraadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kassaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.omzetrapportageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoekKamersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activiteitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activiteitenlijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.begeleidersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,13 +55,16 @@
             this.overSomerenAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,8 +76,8 @@
             this.bestandToolStripMenuItem,
             this.toolStripMenuItem5,
             this.docentenToolStripMenuItem,
-            this.toolStripMenuItem1,
             this.bardienstToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.activiteitenToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -145,6 +148,37 @@
             this.toonDocentenToolStripMenuItem.Text = "Toon Docenten";
             this.toonDocentenToolStripMenuItem.Click += new System.EventHandler(this.toonDocentenToolStripMenuItem_Click);
             // 
+            // bardienstToolStripMenuItem
+            // 
+            this.bardienstToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.drankvoorraadToolStripMenuItem,
+            this.kassaToolStripMenuItem,
+            this.omzetrapportageToolStripMenuItem});
+            this.bardienstToolStripMenuItem.Name = "bardienstToolStripMenuItem";
+            this.bardienstToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.bardienstToolStripMenuItem.Text = "Bardienst";
+            // 
+            // drankvoorraadToolStripMenuItem
+            // 
+            this.drankvoorraadToolStripMenuItem.Name = "drankvoorraadToolStripMenuItem";
+            this.drankvoorraadToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.drankvoorraadToolStripMenuItem.Text = "Drankvoorraad";
+            this.drankvoorraadToolStripMenuItem.Click += new System.EventHandler(this.drankvoorraadToolStripMenuItem_Click_1);
+            // 
+            // kassaToolStripMenuItem
+            // 
+            this.kassaToolStripMenuItem.Name = "kassaToolStripMenuItem";
+            this.kassaToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.kassaToolStripMenuItem.Text = "Kassa";
+            this.kassaToolStripMenuItem.Click += new System.EventHandler(this.kassaToolStripMenuItem_Click);
+            // 
+            // omzetrapportageToolStripMenuItem
+            // 
+            this.omzetrapportageToolStripMenuItem.Name = "omzetrapportageToolStripMenuItem";
+            this.omzetrapportageToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.omzetrapportageToolStripMenuItem.Text = "Omzetrapportage";
+            this.omzetrapportageToolStripMenuItem.Click += new System.EventHandler(this.omzetrapportageToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -174,35 +208,6 @@
             this.zoekKamersToolStripMenuItem.Name = "zoekKamersToolStripMenuItem";
             this.zoekKamersToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.zoekKamersToolStripMenuItem.Text = "Zoek Kamers";
-            // 
-            // bardienstToolStripMenuItem
-            // 
-            this.bardienstToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.drankvoorraadToolStripMenuItem,
-            this.kassaToolStripMenuItem,
-            this.omzetrapportageToolStripMenuItem});
-            this.bardienstToolStripMenuItem.Name = "bardienstToolStripMenuItem";
-            this.bardienstToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
-            this.bardienstToolStripMenuItem.Text = "Bardienst";
-            // 
-            // drankvoorraadToolStripMenuItem
-            // 
-            this.drankvoorraadToolStripMenuItem.Name = "drankvoorraadToolStripMenuItem";
-            this.drankvoorraadToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
-            this.drankvoorraadToolStripMenuItem.Text = "Drankvoorraad";
-            this.drankvoorraadToolStripMenuItem.Click += new System.EventHandler(this.drankvoorraadToolStripMenuItem_Click);
-            // 
-            // kassaToolStripMenuItem
-            // 
-            this.kassaToolStripMenuItem.Name = "kassaToolStripMenuItem";
-            this.kassaToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
-            this.kassaToolStripMenuItem.Text = "Kassa";
-            // 
-            // omzetrapportageToolStripMenuItem
-            // 
-            this.omzetrapportageToolStripMenuItem.Name = "omzetrapportageToolStripMenuItem";
-            this.omzetrapportageToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
-            this.omzetrapportageToolStripMenuItem.Text = "Omzetrapportage";
             // 
             // activiteitenToolStripMenuItem
             // 
@@ -263,12 +268,25 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(8, 22);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(757, 474);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Chartreuse;
+            this.button1.Location = new System.Drawing.Point(657, 442);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Afrekenen";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -317,11 +335,22 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(13, 20);
             this.toolStripStatusLabel2.Text = " ";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(797, 270);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(305, 91);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Afrekenen";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Someren_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1119, 553);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
@@ -335,6 +364,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -375,6 +405,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripMenuItem docentenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toonDocentenToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

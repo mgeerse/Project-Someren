@@ -11,11 +11,6 @@ namespace Someren
     {  
         public static SqlConnection openConnectieDB()
         {
-            string host = "spartainholland.database.windows.net";
-            string db = "someren_inholland_db";
-            string user = "spartainholland";
-            string password = "Spartalogin1";
-            //string port = "3306";
 
             try
             {
@@ -104,6 +99,72 @@ namespace Someren
             return docenten_lijst;
         }
 
+        public static List<SomerenModel.Drank> DB_GetDrank()
+        {
+            SqlConnection connection = openConnectieDB();
+            List<SomerenModel.Drank> drank_lijst = new List<SomerenModel.Drank>();
+
+            StringBuilder sb = new StringBuilder();
+            // schrijf hier een query om te zorgen dat er een lijst met studenten wordt getoond
+            sb.Append("SELECT [Naam], [Prijs], [Voorraad], [Aantal_Verkocht], [DrankId] FROM [dbo].[A5_Voorraad]");
+
+            String sql = sb.ToString();
+
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Prepare();
+
+           SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                decimal Prijs = reader.GetDecimal(1);
+                string Naam = reader.GetString(0);
+                int voorraad = reader.GetInt32(2);
+                int aantalverkocht = reader.GetInt32(3);
+                int drankid = reader.GetInt32(4);
+
+                SomerenModel.Drank Drank = new SomerenModel.Drank();
+
+                Drank.setPrijs(Prijs);
+                Drank.setNaam(Naam);
+                Drank.setVoorraad(voorraad);
+                Drank.setVerkocht(aantalverkocht);
+                Drank.setId(drankid);
+
+                drank_lijst.Add(Drank);
+            }
+            return drank_lijst;
+        }
+
+        
+        public static int DB_GetStudentId(string naam)
+        {
+            SqlConnection connection = openConnectieDB();
+            string query = "SELECT StudentId FROM A5_Student WHERE Naam = @Naam";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@Naam", System.Data.SqlDbType.NVarChar).Value = naam;
+            command.Prepare();
+            return (int)command.ExecuteScalar();
+        }
+
+
+        public void DB_VerkoopDrank(int studentId, string drank)
+        {
+            SqlConnection connection = openConnectieDB();
+
+            string query = "INSERT INTO A5_Verkopen [Student], [Datum], [Drank], [Aantal] VALUES(@StudentId, @Datum, @Drank, Aantal = @Aantal)";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@StudentId", System.Data.SqlDbType.Int).Value = studentId;
+            command.Parameters.Add("Datum", System.Data.SqlDbType.DateTime).Value = System.Data.SqlDbType.DateTime;
+            command.Parameters.Add("Drank", System.Data.SqlDbType.NVarChar).Value = drank;
+            command.Prepare();
+            command.ExecuteNonQuery();
+
+
+            sluitConnectieDB(connection);
+        }
+
         public static List<SomerenModel.Drankvoorraad> DB_GetDrankvoorraad()
         {
             SqlConnection connection = openConnectieDB();
@@ -171,5 +232,70 @@ namespace Someren
 
             return activiteiten_lijst;
         }
+
+        public void DB_AddActiviteit(int ActiviteitID, string Omschrijving)
+        {
+            SqlConnection connection = openConnectieDB();
+
+            string query = "INSERT INTO A5_Activiteit ([ActiviteitID], [Omschrijving], [aantalStudenten], [aantalBegeleiders]) VALUES(@ActiviteitID, @Omschrijving, aantalStudenten = @aantalStudenten, aantalStudenten = @aantalBegeleiders)";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@ActiviteitID", System.Data.SqlDbType.Int).Value = ActiviteitID;
+            command.Parameters.Add("Omschrijving", System.Data.SqlDbType.Text).Value = Omschrijving;
+            command.Prepare();
+            command.ExecuteNonQuery();
+
+
+            sluitConnectieDB(connection);
+        }
+
+        public void DB_ChangeActiviteit(int ActiviteitID, string Omschrijving)
+        {
+            SqlConnection connection = openConnectieDB();
+
+            string query = "UPDATE A5_Activiteit (ActiviteitID = @ActiviteitID, Omschrijving = @Omschrijving, aantalStudenten = @aantalStudenten, aantalBegeleiders = @aantalBegeleiders)";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add("@ActiviteitID", System.Data.SqlDbType.Int).Value = ActiviteitID;
+            command.Parameters.Add("Omschrijving", System.Data.SqlDbType.Text).Value = Omschrijving;
+            command.Prepare();
+            command.ExecuteNonQuery();
+
+
+            sluitConnectieDB(connection);
+        }
+
+        public static int DB_GetActiviteitID(string Omschrijving)
+        {
+            SqlConnection connection = openConnectieDB();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT [ActiviteitID] FROM [A5_Activiteit] WHERE [Omschrijving] = @Omschrijving");
+
+            String sqlCommand = sb.ToString();
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            command.Parameters.Add("@Omschrijving", System.Data.SqlDbType.Text).Value = Omschrijving;
+            command.Prepare();
+            return (int)command.ExecuteScalar();
+
+        }
+
+        public static void DB_DeleteActiviteit(string Omschrijving)
+        {
+            int ActiviteitID = DB_GetActiviteitID(Omschrijving);
+            SqlConnection connection = openConnectieDB();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("DELETE FROM A5_Activiteit WHERE ActiviteitID = @ActiviteitID");
+            String sqlCommand = sb.ToString();
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            command.Parameters.Add("@ActiviteitID", System.Data.SqlDbType.Int).Value = ActiviteitID;
+            command.Prepare();
+            command.ExecuteNonQuery();
+            sb.Clear();
+            command.Dispose();
+        }
+
+
+        // public void 
     }
 }

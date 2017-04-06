@@ -59,6 +59,55 @@ namespace Someren
             }
         }
 
+        public class Drank
+        {
+            int Id;
+            string naam;
+            decimal prijs;
+            int voorraad;
+            int verkocht;
+
+            public void setId(int drankId)
+            {
+                Id = drankId;
+            }
+            public void setNaam(string drankNaam)
+            {
+                naam = drankNaam;
+            }
+            public void setPrijs(decimal drankPrijs)
+            {
+                prijs = drankPrijs;
+            }
+            public void setVoorraad(int drankVoorraad)
+            {
+                voorraad = drankVoorraad;
+            }
+            public void setVerkocht(int drankVerkocht)
+            {
+                verkocht = drankVerkocht;
+            }
+            public string getNaam()
+            {
+                return naam;
+            }
+            public int getVoorraad()
+            {
+                return voorraad;
+            }
+            public decimal getPrijs()
+            {
+                return prijs;
+            }
+            public int getId()
+            {
+                return Id;
+            }
+            public int getVerkocht()
+            {
+                return verkocht;
+            }
+        }
         public class Drankvoorraad
         {
             int Id;
@@ -118,7 +167,6 @@ namespace Someren
             }
 
         }
-
         public class activiteitenlijst
         {
             int Id;
@@ -134,7 +182,7 @@ namespace Someren
             public void setOmschrijving(string dbOmschrijving)
             {
                 Omschrijving = dbOmschrijving;
-            }                   
+            }
 
             public void setaantalStudenten(int dbaantalStudenten)
             {
@@ -224,6 +272,5 @@ namespace Someren
                 return dl;
             }
         }
-
     }
 }
