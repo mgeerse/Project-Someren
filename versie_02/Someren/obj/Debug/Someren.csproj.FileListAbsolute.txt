@@ -16,3 +16,12 @@ C:\Users\Maarten\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\So
 C:\Users\Maarten\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\Someren.csproj.GenerateResource.Cache
 C:\Users\Maarten\Documents\GitHub\Project-Someren\versie_02\Someren\bin\Debug\Someren.exe
 C:\Users\Maarten\Documents\GitHub\Project-Someren\versie_02\Someren\bin\Debug\Someren.pdb
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\bin\Debug\Someren.exe.config
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\Someren.exe
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\Someren.pdb
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\bin\Debug\Someren.exe
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\bin\Debug\Someren.pdb
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\Someren.csprojResolveAssemblyReference.cache
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\Someren.Someren_Form.resources
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\Someren.Properties.Resources.resources
+C:\Users\mgeer\Documents\GitHub\Project-Someren\versie_02\Someren\obj\Debug\Someren.csproj.GenerateResource.Cache

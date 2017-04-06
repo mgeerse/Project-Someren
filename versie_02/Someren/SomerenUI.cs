@@ -206,6 +206,5 @@ namespace Someren
             kalender.Left = 200;
             return kalender;
         }
-
     }
 }

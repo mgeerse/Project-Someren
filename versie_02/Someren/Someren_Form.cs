@@ -239,6 +239,97 @@ namespace Someren
             this.panel1.Controls.Add(SomerenUI.showDrankvoorraad());
         }
 
+        public void begeleidersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            this.groupBox1.Text = "Begeleiders";
+            List<SomerenModel.Begeleider> Begeleiders = SomerenDB.DB_GetBegeleiders();
+            ListBox Begeleider = new ListBox();
+            ListBox Docent = new ListBox();
+            Button toevoegKnop = new Button();
+            Button verwijderKnop = new Button();
+            Label begeleiderLabel = new Label();
+            Label docentLabel = new Label();
+
+            begeleiderLabel.Text = "Begleiders:";
+            docentLabel.Text = "Docenten:";
+
+            begeleiderLabel.Left = 75;
+            docentLabel.Left = 375;
+
+            toevoegKnop.Left = 210;
+            toevoegKnop.Top = 100;
+            toevoegKnop.Text = "<------";
+            toevoegKnop.Name = "toevoegKnop";
+            toevoegKnop.Click += new EventHandler(toevoegKnopEvent);
+            toevoegKnop.Click += new EventHandler(begeleidersToolStripMenuItem_Click);
+            verwijderKnop.Left = 210;
+            verwijderKnop.Top = 150;
+            verwijderKnop.Text = "------>";
+            verwijderKnop.Name = "verwijderKnop";
+            verwijderKnop.Click += new EventHandler(verwijderKnopEvent);
+            verwijderKnop.Click += new EventHandler(begeleidersToolStripMenuItem_Click);
+            Begeleider.Width = 200;
+            Begeleider.Height = 350;
+            Begeleider.Top = 20;
+            Begeleider.Name = "begeleiderList";
+            Docent.Left = 300;
+            Docent.Width = 200;
+            Docent.Top = 20;
+            Docent.Height = 350;
+            Docent.Name = "docentList";
+            foreach (var item in Begeleiders)
+            {
+                Begeleider.Items.Add(item.getNaam());
+            }
+
+            List<SomerenModel.Docent> Docenten = SomerenDB.DB_getDocentNotBegeleider();
+
+            foreach (var item in Docenten)
+            {
+                Docent.Items.Add(item.getNaam());
+            }
+
+            this.panel1.Controls.Add(Begeleider);
+            this.panel1.Controls.Add(Docent);
+            this.panel1.Controls.Add(toevoegKnop);
+            this.panel1.Controls.Add(verwijderKnop);
+            this.panel1.Controls.Add(docentLabel);
+            this.panel1.Controls.Add(begeleiderLabel);
+        }
+
+        public void verwijderKnopEvent(object sender, EventArgs e)
+        {
+            //BegeleiderNaarDocent
+            Control[] d = Controls.Find("begeleiderList", true);
+            string begeleiderGeselecteerd = "";
+            foreach (ListBox item in d)
+            {
+                begeleiderGeselecteerd = item.SelectedItem.ToString();
+            }
+
+            SomerenDB.DB_BegeleiderNaarDocent(begeleiderGeselecteerd);
+
+            this.panel1.Update();
+        }
+        public void toevoegKnopEvent(object sender, EventArgs e)
+        {
+            //DocentNaarBegeleider
+            Control[] c = Controls.Find("docentList", true);
+            string docentGeselecteerd = "";
+            foreach (ListBox item in c)
+            {
+                docentGeselecteerd = item.SelectedItem.ToString();
+            }
+
+            SomerenDB.DB_DocentNaarBegeleider(docentGeselecteerd);
+
+            
+
+
+            this.panel1.Update();
+        }
+
         //MessageBox.Show("einde");
     }
     }

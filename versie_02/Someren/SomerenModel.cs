@@ -166,6 +166,44 @@ namespace Someren
                 return voorraad;
             }
 
+
+        }
+        public class BegeleiderList
+        {
+            List<SomerenModel.Docent> sl = new List<SomerenModel.Docent>();
+
+            public void addList(SomerenModel.Docent s)
+            {
+                sl.Add(s);
+            }
+
+            public List<SomerenModel.Docent> getList()
+            {
+                return sl;
+            }
+        }
+        public class Begeleider
+        {
+            int id;
+            string naam;
+            public void setId(int docentid)
+            {
+                id = docentid;
+            }
+            public void setNaam(string Naam)
+            {
+                naam = Naam;
+            }
+            public string getNaam()
+            {
+                return naam;
+            }
+            public int getId()
+            {
+                return id;
+            }
+
+
         }
 
         public class StudentList

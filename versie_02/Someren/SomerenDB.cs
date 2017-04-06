@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 namespace Someren
 {
     class SomerenDB
-    {  
+    {
         public static SqlConnection openConnectieDB()
         {
 
@@ -30,7 +30,7 @@ namespace Someren
                 SqlConnection connection = null;
                 Console.WriteLine(e.ToString());
                 return connection;
-            }            
+            }
         }
 
         private void sluitConnectieDB(SqlConnection connection)
@@ -113,7 +113,7 @@ namespace Someren
             SqlCommand command = new SqlCommand(sql, connection);
             command.Prepare();
 
-           SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 decimal Prijs = reader.GetDecimal(1);
@@ -135,7 +135,7 @@ namespace Someren
             return drank_lijst;
         }
 
-        
+
         public static int DB_GetStudentId(string naam)
         {
             SqlConnection connection = openConnectieDB();
@@ -199,7 +199,115 @@ namespace Someren
 
             return dranken_lijst;
         }
+        public static List<SomerenModel.Begeleider> DB_GetBegeleiders()
+        {
+            SqlConnection connection = openConnectieDB();
+            List<SomerenModel.Begeleider> begeleider_lijst = new List<SomerenModel.Begeleider>();
 
+            StringBuilder sb = new StringBuilder();
+            // schrijf hier een query om te zorgen dat er een lijst met studenten wordt getoond
+            sb.Append("SELECT [Naam] FROM [dbo].[A5_Docent]");
+            sb.Append("INNER JOIN A5_Begeleider ON A5_Docent.DocentId = A5_Begeleider.DocentId");
+            //sb.Append("ORDERBY [Naam]"); Loopt vast op een ORDER BY QUERY????
+
+            String sqlCommand = sb.ToString();
+
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            command.Prepare();
+
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                SomerenModel.Begeleider begeleider = new SomerenModel.Begeleider();
+                begeleider.setNaam(reader.GetString(0));
+                begeleider_lijst.Add(begeleider);
+            }
+            return begeleider_lijst;
+        }
+
+        public static List<SomerenModel.Docent> DB_getDocentNotBegeleider()
+        {
+            SqlConnection connection = openConnectieDB();
+            List<SomerenModel.Docent> docent_Lijst = new List<SomerenModel.Docent>();
+
+            StringBuilder sb = new StringBuilder();
+            // schrijf hier een query om te zorgen dat er een lijst met studenten wordt getoond
+            sb.Append("SELECT [A5_Docent].[Naam]");
+            sb.Append("FROM [A5_Docent]");
+            sb.Append("LEFT JOIN [A5_Begeleider] ON ([A5_Docent].[DocentId] = [A5_Begeleider].[DocentId])");
+            sb.Append("WHERE [A5_Begeleider].[DocentId] IS NULL");
+
+            String sqlCommand = sb.ToString();
+
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            command.Prepare();
+
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                SomerenModel.Docent Docent = new SomerenModel.Docent();
+                Docent.setNaam(reader.GetString(0));
+                docent_Lijst.Add(Docent);
+            }
+            return docent_Lijst;
+        }
+
+        public static void DB_BegeleiderNaarDocent(string naamBegeleider)
+        {
+            int DocentId = DB_GetDocentId(naamBegeleider);
+            SqlConnection connection = openConnectieDB();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("DELETE FROM A5_Begeleider WHERE DocentId = @DocentId");
+            String sqlCommand = sb.ToString();
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            command.Parameters.Add("@DocentId", System.Data.SqlDbType.Int).Value = DocentId;
+            command.Prepare();
+            command.ExecuteNonQuery();
+            sb.Clear();
+            command.Dispose();
+
+            StringBuilder stringTwee = new StringBuilder();
+            stringTwee.Append("INSERT INTO A5_Docent (Naam) VALUES (@Naam)");
+            String sqlCommandTwee = stringTwee.ToString();
+            SqlCommand commandTwee = new SqlCommand(sqlCommandTwee, connection);
+            commandTwee.Parameters.Add("@Naam", System.Data.SqlDbType.NVarChar, 50).Value = naamBegeleider;
+            //command.Parameters.Add("@DocentId", System.Data.SqlDbType.Int).Value = DocentId;
+            command.Prepare();
+            command.ExecuteNonQuery();
+            command.Dispose();
+            connection.Close();
+        }
+
+        public static void DB_DocentNaarBegeleider(string docentNaam)
+        {
+            int DocentId = DB_GetDocentId(docentNaam);
+            SqlConnection connection = openConnectieDB();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("INSERT INTO dbo.A5_Begeleider (DocentId) VALUES (@DocentId)");
+            String sqlcommand = sb.ToString();
+
+            SqlCommand command = new SqlCommand(sqlcommand, connection);
+            command.Prepare();
+            command.Parameters.Add("@DocentId", System.Data.SqlDbType.Int).Value = DocentId;
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public static int DB_GetDocentId(string DocentNaam)
+        {
+            SqlConnection connection = openConnectieDB();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT [DocentId] FROM [A5_Docent] WHERE [Naam] = @Naam");
+
+            String sqlCommand = sb.ToString();
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            command.Parameters.Add("@Naam", System.Data.SqlDbType.NVarChar, 50).Value = DocentNaam;
+            command.Prepare();
+            int DocentId = (int)command.ExecuteScalar();
+            
+            return DocentId;
+        }
 
         // public void 
     }
