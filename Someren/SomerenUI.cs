@@ -259,15 +259,15 @@ namespace Someren
             return button;
         }
 
-        public static Control activiteitverwijderen()
-        {
-            Button button = new Button();
-            button.Click += new EventHandler(activiteitverwijderHandler);
-            button.Text = "Verwijderen";
-            button.Left = 405;
-            button.Top = 90;
-            return button;
-        }
+        //public static Control activiteitverwijderen()
+        //{
+        //    Button button = new Button();
+        //    button.Click += new EventHandler(activiteitverwijderHandler);
+        //    button.Text = "Verwijderen";
+        //    button.Left = 405;
+        //    button.Top = 90;
+        //    return button;
+        //}
 
         public static void activiteitverwijderHandler(object sender, EventArgs e)
         {
