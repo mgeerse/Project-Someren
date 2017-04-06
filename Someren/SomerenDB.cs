@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Someren
 {
@@ -269,14 +271,23 @@ namespace Someren
         {
             SqlConnection connection = openConnectieDB();
             StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT [ActiviteitID] FROM [A5_Activiteit] WHERE [Omschrijving] = @Omschrijving");
+            sb.Append("SELECT [ActiviteitID] FROM [A5_Activiteit] WHERE [Omschrijving] = '@Omschrijving'");
 
             String sqlCommand = sb.ToString();
             SqlCommand command = new SqlCommand(sqlCommand, connection);
-            command.Parameters.Add("@Omschrijving", System.Data.SqlDbType.Text).Value = Omschrijving;
+            command.Parameters.Add("@Omschrijving", System.Data.SqlDbType.NVarChar, 45).Value = Omschrijving;
             command.Prepare();
-            return (int)command.ExecuteScalar();
 
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int Id = reader.GetInt32(0);
+                MessageBox.Show(Id.ToString());
+                return Id;
+            }
+            connection.Close();
+            return 40;
         }
 
         public static void DB_DeleteActiviteit(string Omschrijving)
@@ -285,14 +296,15 @@ namespace Someren
             SqlConnection connection = openConnectieDB();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("DELETE FROM A5_Activiteit WHERE Omschrijving = @Omschrijving");
+            sb.Append("DELETE FROM A5_Activiteit WHERE Omschrijving = '@Omschrijving'");
             String sqlCommand = sb.ToString();
             SqlCommand command = new SqlCommand(sqlCommand, connection);
-            command.Parameters.Add("@Omschrijving", System.Data.SqlDbType.Text).Value = Omschrijving;
+            command.Parameters.Add("@Omschrijving", System.Data.SqlDbType.NVarChar, 45).Value = Omschrijving;
             command.Prepare();
             command.ExecuteNonQuery();
             sb.Clear();
             command.Dispose();
+            connection.Close();
         }
 
 
