@@ -261,7 +261,6 @@ namespace Someren
             this.panel1.Controls.Clear();
             this.groupBox1.Text = "Activiteitenlijst";
             this.panel1.Controls.Add(SomerenUI.showactiviteitenlijst());
-            this.panel1.Controls.Add(SomerenUI.activiteittoevoegen());
             this.panel1.Controls.Add(SomerenUI.activiteitwijzigen());
             this.panel1.Controls.Add(SomerenUI.activiteittonen());
 
@@ -273,8 +272,31 @@ namespace Someren
             verwijderKnop.Click += new EventHandler(verwijderKnopEvent);
             verwijderKnop.Click += new EventHandler(activiteitenlijstToolStripMenuItem_Click);
 
+            Button toevoegKnop = new Button();
+            verwijderKnop.Left = 405;
+            verwijderKnop.Top = 30;
+            verwijderKnop.Text = "Toevoegen";
+            verwijderKnop.Name = "ToevoegKnop";
+            verwijderKnop.Click += new EventHandler(ToevoegKnopEvent);
+            verwijderKnop.Click += new EventHandler(activiteitenlijstToolStripMenuItem_Click);
+
+            this.panel1.Controls.Add(toevoegKnop);
             this.panel1.Controls.Add(verwijderKnop);
 
+        }
+
+        public void ToevoegKnopEvent(object sender, EventArgs e)
+        {
+            Control[] d = Controls.Find("Activiteitenlijst", true);
+            string activiteitGeselecteerd = "";
+            foreach (ListBox item in d)
+            {
+                activiteitGeselecteerd = item.SelectedItem.ToString();
+            }
+
+            SomerenDB.DB_AddActiviteit(activiteitGeselecteerd);
+
+            this.panel1.Update();
         }
 
         public void verwijderKnopEvent(object sender, EventArgs e)
@@ -290,7 +312,5 @@ namespace Someren
 
             this.panel1.Update();
         }
-
-        //MessageBox.Show("einde");
     }
-    }
+}

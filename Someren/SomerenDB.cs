@@ -275,20 +275,22 @@ namespace Someren
             SqlCommand command = new SqlCommand(sqlCommand, connection);
             command.Parameters.Add("@Omschrijving", System.Data.SqlDbType.Text).Value = Omschrijving;
             command.Prepare();
-            return (int)command.ExecuteScalar();
+
+            int ActiviteitID = (int)command.ExecuteScalar();
+            return ActiviteitID;
 
         }
 
         public static void DB_DeleteActiviteit(string Omschrijving)
         {
-            //int ActiviteitID = DB_GetActiviteitID(Omschrijving);
+            int ActiviteitID = DB_GetActiviteitID(Omschrijving);
             SqlConnection connection = openConnectieDB();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("DELETE FROM A5_Activiteit WHERE Omschrijving = @Omschrijving");
+            sb.Append("DELETE FROM A5_Activiteit WHERE ActiviteitID = @ActiviteitID");
             String sqlCommand = sb.ToString();
             SqlCommand command = new SqlCommand(sqlCommand, connection);
-            command.Parameters.Add("@Omschrijving", System.Data.SqlDbType.Text).Value = Omschrijving;
+            command.Parameters.Add("@ActiviteitID", System.Data.SqlDbType.Int).Value = ActiviteitID;
             command.Prepare();
             command.ExecuteNonQuery();
             sb.Clear();
