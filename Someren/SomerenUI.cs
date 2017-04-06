@@ -233,15 +233,15 @@ namespace Someren
             return listView1;
         }
 
-        public static Control activiteittoevoegen()
-        {
-            Button button = new Button();
-            button.Click += new EventHandler(activiteittoevoegenHandler);
-            button.Text = "Toevoegen";
-            button.Left = 405;
-            button.Top = 30;
-            return button;
-        }
+        //public static Control activiteittoevoegen()
+        //{
+        //    Button button = new Button();
+        //    button.Click += new EventHandler(activiteittoevoegenHandler);
+        //    button.Text = "Toevoegen";
+        //    button.Left = 405;
+        //    button.Top = 30;
+        //    return button;
+        //}
 
         public static void activiteittoevoegenHandler(object sender, EventArgs e)
         {
@@ -252,54 +252,26 @@ namespace Someren
         public static Control activiteitwijzigen()
         {
             Button button = new Button();
-            button.Click += new EventHandler(wijzigActiviteitHandler);
+            button.Click += new EventHandler(activiteitwijzigenHandler);
             button.Text = "Wijzigen";
             button.Left = 405;
             button.Top = 60;
             return button;
         }
 
-        public static void wijzigActiviteitHandler(object sender, EventArgs e)
+        //public static Control activiteitverwijderen()
+        //{
+        //    Button button = new Button();
+        //    button.Click += new EventHandler(activiteitverwijderHandler);
+        //    button.Text = "Verwijderen";
+        //    button.Left = 405;
+        //    button.Top = 90;
+        //    return button;
+        //}
+
+        public static void activiteitwijzigenHandler(object sender, EventArgs e)
         {
-
-        }
-
-        public static Control activiteitverwijderen()
-        {
-            Button button = new Button();
-            button.Click += new EventHandler(activiteitverwijderHandler);
-            button.Text = "Verwijderen";
-            button.Left = 405;
-            button.Top = 90;
-            return button;
-        }
-
-        public static void activiteitverwijderHandler(object sender, EventArgs e)
-        {
-            //Wijzigen!
-
             ListView listView1 = new ListView();
-            //listView1.SelectedItems[0].Remove();
-            if (listView1.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Er is niks geselecteerd!");
-            }
-            if (listView1.SelectedItems.Count >= 1)
-            {
-                var confirmation = MessageBox.Show("weet u zeker dat u deze activiteit wilt verwijderen>", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (confirmation == DialogResult.Yes)
-                {
-                    for (int i = listView1.SelectedItems.Count - 1; i >= 0; i--)
-                    {
-                        if (listView1.Items[i].Selected)
-                        {
-                            listView1.Items[i].Remove();
-                        }
-                    }
-                }
-            }
-                else { }
-                          
         }
 
         public static Control addUILabel(string text)

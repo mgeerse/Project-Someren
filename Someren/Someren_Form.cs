@@ -171,7 +171,7 @@ namespace Someren
 
         private void drankvoorraadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void omzetrapportageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -209,28 +209,28 @@ namespace Someren
             //MessageBox.Show(naam.SelectedItems.ToString());
             // c.
 
+            
+            
+                List<string> dingen = new List<string>();
 
-
-            List<string> dingen = new List<string>();
-
-            foreach (ListView c in panel1.Controls)
-            {
-                ListView.CheckedListViewItemCollection vc = c.CheckedItems;
-
-                string[] strValues = new string[c.CheckedItems.Count];
-
-                for (int i = 0; i < vc.Count; i++)
+                foreach (ListView c in panel1.Controls)
                 {
-                    strValues[i] = c.Items[vc[i].Index].SubItems[0].Text;
-                    dingen.Add(strValues[i].ToString());
+                    ListView.CheckedListViewItemCollection vc = c.CheckedItems;
+
+                    string[] strValues = new string[c.CheckedItems.Count];
+
+                    for (int i = 0; i < vc.Count; i++)
+                    {
+                        strValues[i] = c.Items[vc[i].Index].SubItems[0].Text;
+                        dingen.Add(strValues[i].ToString());
+                    }
+                }
+                MessageBox.Show(dingen.Count.ToString());
+                foreach (var item in dingen)
+                {
+                    
                 }
             }
-            MessageBox.Show(dingen.Count.ToString());
-            foreach (var item in dingen)
-            {
-
-            }
-        }
         private void button3_Click(object sender, EventArgs e)
         {
             List<string> activiteiten = new List<string>();
@@ -261,7 +261,6 @@ namespace Someren
             this.panel1.Controls.Clear();
             this.groupBox1.Text = "Activiteitenlijst";
             this.panel1.Controls.Add(SomerenUI.showactiviteitenlijst());
-            this.panel1.Controls.Add(SomerenUI.activiteittoevoegen());
             this.panel1.Controls.Add(SomerenUI.activiteitwijzigen());
             this.panel1.Controls.Add(SomerenUI.activiteittonen());
 
@@ -273,32 +272,45 @@ namespace Someren
             verwijderKnop.Click += new EventHandler(verwijderKnopEvent);
             verwijderKnop.Click += new EventHandler(activiteitenlijstToolStripMenuItem_Click);
 
+            Button toevoegKnop = new Button();
+            verwijderKnop.Left = 405;
+            verwijderKnop.Top = 30;
+            verwijderKnop.Text = "Toevoegen";
+            verwijderKnop.Name = "ToevoegKnop";
+            verwijderKnop.Click += new EventHandler(ToevoegKnopEvent);
+            verwijderKnop.Click += new EventHandler(activiteitenlijstToolStripMenuItem_Click);
+
+            this.panel1.Controls.Add(toevoegKnop);
             this.panel1.Controls.Add(verwijderKnop);
 
+        }
+
+        public void ToevoegKnopEvent(object sender, EventArgs e)
+        {
+            Control[] d = Controls.Find("Activiteitenlijst", true);
+            string activiteitGeselecteerd = "";
+            foreach (ListBox item in d)
+            {
+                activiteitGeselecteerd = item.SelectedItem.ToString();
+            }
+
+            SomerenDB.DB_AddActiviteit(activiteitGeselecteerd);
+
+            this.panel1.Update();
         }
 
         public void verwijderKnopEvent(object sender, EventArgs e)
         {
             Control[] d = Controls.Find("Activiteitenlijst", true);
-            ListView[] x = (ListView[])d;
-
             string activiteitGeselecteerd = "";
-            foreach (ListView item in x)
+            foreach (ListBox item in d)
             {
-                for (int i = item.SelectedItems.Count - 1; i >= 0; i--)
-                {
-                    if (item.Items[i].Selected)
-                    {
-                        item.Items[i].Remove();
-                        activiteitGeselecteerd = item.SelectedItems[i].ToString();
-                    }
-                }
+                activiteitGeselecteerd = item.SelectedItem.ToString();
             }
+
             SomerenDB.DB_DeleteActiviteit(activiteitGeselecteerd);
 
             this.panel1.Update();
         }
-
-        //MessageBox.Show("einde");
     }
 }
