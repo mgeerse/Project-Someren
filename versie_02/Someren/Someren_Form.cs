@@ -171,7 +171,7 @@ namespace Someren
 
         private void drankvoorraadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void omzetrapportageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -209,28 +209,28 @@ namespace Someren
             //MessageBox.Show(naam.SelectedItems.ToString());
             // c.
 
-            
-            
-                List<string> dingen = new List<string>();
 
-                foreach (ListView c in panel1.Controls)
+
+            List<string> dingen = new List<string>();
+
+            foreach (ListView c in panel1.Controls)
+            {
+                ListView.CheckedListViewItemCollection vc = c.CheckedItems;
+
+                string[] strValues = new string[c.CheckedItems.Count];
+
+                for (int i = 0; i < vc.Count; i++)
                 {
-                    ListView.CheckedListViewItemCollection vc = c.CheckedItems;
-
-                    string[] strValues = new string[c.CheckedItems.Count];
-
-                    for (int i = 0; i < vc.Count; i++)
-                    {
-                        strValues[i] = c.Items[vc[i].Index].SubItems[0].Text;
-                        dingen.Add(strValues[i].ToString());
-                    }
-                }
-                MessageBox.Show(dingen.Count.ToString());
-                foreach (var item in dingen)
-                {
-                    
+                    strValues[i] = c.Items[vc[i].Index].SubItems[0].Text;
+                    dingen.Add(strValues[i].ToString());
                 }
             }
+            MessageBox.Show(dingen.Count.ToString());
+            foreach (var item in dingen)
+            {
+
+            }
+        }
 
         private void drankvoorraadToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -323,13 +323,49 @@ namespace Someren
             }
 
             SomerenDB.DB_DocentNaarBegeleider(docentGeselecteerd);
-
-            
-
-
             this.panel1.Update();
         }
 
+        private void roosterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Gemaakt door Maarten Geerse
+            panel1.Controls.Clear();
+            List<SomerenModel.Rooster> Roosters = SomerenDB.DB_GetRooster();
+            List<SomerenModel.Activiteit> Activiteiten = SomerenDB.DB_GetActiviteiten();
+            List<SomerenModel.Docent> Docenten = SomerenDB.DB_GetDocent();
+            ListView listview = new ListView();
+
+            listview.Width = 575;
+            //listview.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            listview.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listview.Height = 375;
+            listview.View = View.Details;
+            listview.GridLines = true;
+            listview.FullRowSelect = true;
+            listview.MultiSelect = false;
+
+            listview.Columns.Add("Datum");
+            listview.Columns.Add("Activiteit"); //Geef hier de omschrijving! Komt vanuit A5_Activiteit.Omschrijving
+            listview.Columns.Add("Begintijd");
+            listview.Columns.Add("Eindtijd");
+            listview.Columns.Add("Begeleiders"); //Koppel hier begeleiderId aan DocentId -> Geeft naam
+
+            for (int g = 0; g < Activiteiten.Count; g++)
+            {
+                for (int i = 0, l = 0, k = 0; i < Roosters.Count && l < Activiteiten.Count && k < Docenten.Count; i++, l++, k++)
+                {
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = Roosters[i].getDatum();
+                    lvi.SubItems.Add(Activiteiten[i].getOmschrijving());
+                    lvi.SubItems.Add(Roosters[i].getStart().ToString());
+                    lvi.SubItems.Add(Roosters[i].getEind().ToString());
+                    lvi.SubItems.Add(SomerenDB.GetDocentFromDocentId(Docenten[k].getId()));
+                    listview.Items.Add(lvi);
+                }
+            }
+
+            panel1.Controls.Add(listview);
+        }
         //MessageBox.Show("einde");
     }
-    }
+}

@@ -9,6 +9,7 @@ namespace Someren
 {
     class SomerenDB
     {
+
         public static SqlConnection openConnectieDB()
         {
 
@@ -69,6 +70,7 @@ namespace Someren
                 student.setNaam(Naam);
                 studenten_lijst.Add(student);
             }
+            connection.Close();
             return studenten_lijst;
         }
 
@@ -96,6 +98,7 @@ namespace Someren
                 Docent.setNaam(Naam);
                 docenten_lijst.Add(Docent);
             }
+            connection.Close();
             return docenten_lijst;
         }
 
@@ -132,6 +135,7 @@ namespace Someren
 
                 drank_lijst.Add(Drank);
             }
+            connection.Close();
             return drank_lijst;
         }
 
@@ -165,6 +169,23 @@ namespace Someren
             sluitConnectieDB(connection);
         }
 
+        public static string GetDocentFromDocentId(int DocentId)
+        {
+            string DocentNaam = " ";
+            SqlConnection connection = openConnectieDB();
+            SqlCommand command = new SqlCommand("SELECT [Naam] FROM A5_Docent WHERE DocentId = @DocentId", connection);
+            command.Parameters.Add("@DocentId", System.Data.SqlDbType.Int).Value = DocentId;
+            command.Prepare();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                DocentNaam = reader.GetString(0);
+            }
+            connection.Close();
+            return DocentNaam;
+        }
+
         public static List<SomerenModel.Drankvoorraad> DB_GetDrankvoorraad()
         {
             SqlConnection connection = openConnectieDB();
@@ -196,11 +217,12 @@ namespace Someren
                 Drankvoorraad.setVoorraad(Voorraad);
                 dranken_lijst.Add(Drankvoorraad);
             }
-
+            connection.Close();
             return dranken_lijst;
         }
         public static List<SomerenModel.Begeleider> DB_GetBegeleiders()
         {
+            //Gemaakt door Maarten Geerse
             SqlConnection connection = openConnectieDB();
             List<SomerenModel.Begeleider> begeleider_lijst = new List<SomerenModel.Begeleider>();
 
@@ -222,11 +244,13 @@ namespace Someren
                 begeleider.setNaam(reader.GetString(0));
                 begeleider_lijst.Add(begeleider);
             }
+            connection.Close();
             return begeleider_lijst;
         }
 
         public static List<SomerenModel.Docent> DB_getDocentNotBegeleider()
         {
+            //Gemaakt door Maarten Geerse
             SqlConnection connection = openConnectieDB();
             List<SomerenModel.Docent> docent_Lijst = new List<SomerenModel.Docent>();
 
@@ -249,11 +273,13 @@ namespace Someren
                 Docent.setNaam(reader.GetString(0));
                 docent_Lijst.Add(Docent);
             }
+            connection.Close();
             return docent_Lijst;
         }
 
         public static void DB_BegeleiderNaarDocent(string naamBegeleider)
         {
+            //Gemaakt door Maarten Geerse
             int DocentId = DB_GetDocentId(naamBegeleider);
             SqlConnection connection = openConnectieDB();
 
@@ -281,6 +307,7 @@ namespace Someren
 
         public static void DB_DocentNaarBegeleider(string docentNaam)
         {
+            //Gemaakt door Maarten Geerse
             int DocentId = DB_GetDocentId(docentNaam);
             SqlConnection connection = openConnectieDB();
             StringBuilder sb = new StringBuilder();
@@ -296,6 +323,7 @@ namespace Someren
 
         public static int DB_GetDocentId(string DocentNaam)
         {
+            //Gemaakt door Maarten Geerse
             SqlConnection connection = openConnectieDB();
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT [DocentId] FROM [A5_Docent] WHERE [Naam] = @Naam");
@@ -305,8 +333,61 @@ namespace Someren
             command.Parameters.Add("@Naam", System.Data.SqlDbType.NVarChar, 50).Value = DocentNaam;
             command.Prepare();
             int DocentId = (int)command.ExecuteScalar();
-            
+            connection.Close();
             return DocentId;
+        }
+
+        public static List<SomerenModel.Activiteit> DB_GetActiviteiten()
+        {
+            //Gemaakt door Maarten Geerse
+            List<SomerenModel.Activiteit> Activiteiten = new List<SomerenModel.Activiteit>();
+
+            SqlConnection connection = openConnectieDB();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT [ActiviteitID], [Omschrijving], [aantalStudenten], [aantalBegeleiders] FROM [A5_Activiteit]");
+
+            String sqlCommand = sb.ToString();
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                SomerenModel.Activiteit Activiteit = new SomerenModel.Activiteit();
+                Activiteit.setId(reader.GetInt32(0));
+                Activiteit.setOmschrijving(reader.GetString(1));
+                Activiteit.setAantalStudenten(reader.GetInt32(2));
+                Activiteit.setAantalBegeleiders(reader.GetInt32(3));
+
+                Activiteiten.Add(Activiteit);
+            }
+            connection.Close();
+            return Activiteiten;
+        }
+
+        public static List<SomerenModel.Rooster> DB_GetRooster()
+        {
+            //Gemaakt door Maarten Geerse
+            List<SomerenModel.Rooster> Rooster = new List<SomerenModel.Rooster>();
+
+            SqlConnection connection = openConnectieDB();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT [Activiteit], [Begeleider], [Datum], [tijdStart], [tijdEind] FROM [A5_Rooster]");
+            String sqlCommand = sb.ToString();
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            command.Prepare();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                SomerenModel.Rooster RoosterItems = new SomerenModel.Rooster();
+                RoosterItems.setId(reader.GetInt32(0));
+                RoosterItems.setBegeleider(reader.GetInt32(1));
+                RoosterItems.setDatum(reader.GetString(2));
+                RoosterItems.setStartTijd(reader.GetInt32(3));
+                RoosterItems.setEindTijs(reader.GetInt32(4));
+                Rooster.Add(RoosterItems);
+            }
+            connection.Close();
+            return Rooster;
         }
 
         // public void 
