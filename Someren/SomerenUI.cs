@@ -106,46 +106,51 @@ namespace Someren
             return listView1;
         }
 
-        //public static Control showactiviteitenlijst()
-        //{
-        //    List<SomerenModel.activiteitenlijst> dl = SomerenDB.DB_Getactiviteitenlijst();
-        //    ListView listView1 = new ListView();
+        public static Control showactiviteitenlijst()
+        {
+            List<SomerenModel.activiteitenlijst> dl = SomerenDB.DB_Getactiviteitenlijst();
+            ListView listView1 = new ListView();
             
-        //    listView1.View = View.Details;
-        //    listView1.GridLines = true;
-        //    listView1.FullRowSelect = true;
-        //    listView1.MultiSelect = false;
+            listView1.View = View.Details;
+            listView1.GridLines = true;
+            listView1.FullRowSelect = true;
+            listView1.MultiSelect = false;
 
-        //    listView1.Columns.Add("ID", 70);
-        //    listView1.Columns.Add("Omschrijving", 70);
-        //    listView1.Columns.Add("Studenten", 70);
-        //    listView1.Columns.Add("Begeleiders", 70);
+            listView1.Columns.Add("ID", 70);
+            listView1.Columns.Add("Omschrijving", 70);
+            listView1.Columns.Add("Studenten", 70);
+            listView1.Columns.Add("Begeleiders", 70);
 
-        //    foreach (var item in dl)
-        //    {
-        //        SomerenModel.activiteitenlijst activiteitenlijst = new SomerenModel.activiteitenlijst();
-        //        ListViewItem lvi = new ListViewItem();
-        //        lvi.Text = item.getId().ToString();
-        //        lvi.SubItems.Add(item.getOmschrijving());
-        //        lvi.SubItems.Add(item.getaantalStudenten().ToString());
-        //        lvi.SubItems.Add(item.getaantalBegeleiders().ToString());
-        //        listView1.Items.Add(lvi);
-        //    }
+            foreach (var item in dl)
+            {
+                SomerenModel.activiteitenlijst activiteitenlijst = new SomerenModel.activiteitenlijst();
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = item.getId().ToString();
+                lvi.SubItems.Add(item.getOmschrijving());
+                lvi.SubItems.Add(item.getaantalStudenten().ToString());
+                lvi.SubItems.Add(item.getaantalBegeleiders().ToString());
+                listView1.Items.Add(lvi);
+            }
 
-        //    int aantal = dl.Count();
+            int aantal = dl.Count();
 
-        //    listView1.Height = 1000;
-        //    listView1.Width = 500;
+            listView1.Height = 1000;
+            listView1.Width = 500;
 
-        //    return listView1;
-        //}
+            return listView1;
+        }
 
-        //public static Control activiteittoevoegen()
-        //{
-            
+        public static Control activiteittoevoegen()
+        {
+            Button button = new Button();
 
-        //    return ;
-        //}
+            button.DialogResult = DialogResult.OK;=
+            button.Location = new Point(20, 30);
+            button.Text = " enter text";
+            button.Click += new EventHandler(ButtonClickOneEvent);
+            Controls.Add(button);
+            return ;
+        }
 
         public static Control addUILabel(string text)
         {

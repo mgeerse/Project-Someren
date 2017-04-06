@@ -119,53 +119,53 @@ namespace Someren
 
         }
 
-        //public class activiteitenlijst
-        //{
-        //    int Id;
-        //    string Omschrijving;
-        //    int aantalStudenten;
-        //    int aantalBegeleiders;
+        public class activiteitenlijst
+        {
+            int Id;
+            string Omschrijving;
+            int aantalStudenten;
+            int aantalBegeleiders;
 
-        //    public void setId(int ActiviteitID)
-        //    {
-        //        Id = ActiviteitID;
-        //    }
+            public void setId(int ActiviteitID)
+            {
+                Id = ActiviteitID;
+            }
 
-        //    public void setOmschrijving(string dbOmschrijving)
-        //    {
-        //        Omschrijving = dbOmschrijving;
-        //    }                   
+            public void setOmschrijving(string dbOmschrijving)
+            {
+                Omschrijving = dbOmschrijving;
+            }                   
 
-        //    public void setaantalStudenten(int dbaantalStudenten)
-        //    {
-        //        aantalStudenten = dbaantalStudenten;
-        //    }
+            public void setaantalStudenten(int dbaantalStudenten)
+            {
+                aantalStudenten = dbaantalStudenten;
+            }
 
-        //    public void setaantalBegeleiders(int dbaantalBegeleiders)
-        //    {
-        //        aantalBegeleiders = dbaantalBegeleiders;
-        //    }
+            public void setaantalBegeleiders(int dbaantalBegeleiders)
+            {
+                aantalBegeleiders = dbaantalBegeleiders;
+            }
 
-        //    public int getId()
-        //    {
-        //        return Id;
-        //    }
+            public int getId()
+            {
+                return Id;
+            }
 
-        //    public string getOmschrijving()
-        //    {
-        //        return Omschrijving;
-        //    }
+            public string getOmschrijving()
+            {
+                return Omschrijving;
+            }
 
-        //    public int getaantalStudenten()
-        //    {
-        //        return aantalStudenten;
-        //    }
+            public int getaantalStudenten()
+            {
+                return aantalStudenten;
+            }
 
-        //    public int getaantalBegeleiders()
-        //    {
-        //        return aantalBegeleiders;
-        //    }
-        //}
+            public int getaantalBegeleiders()
+            {
+                return aantalBegeleiders;
+            }
+        }
 
         public class StudentList
         {
@@ -210,20 +210,20 @@ namespace Someren
             }
         }
 
-        //public class activiteitenlijstList
-        //{
-        //    List<SomerenModel.activiteitenlijst> dl = new List<SomerenModel.activiteitenlijst>();
+        public class activiteitenlijstList
+        {
+            List<SomerenModel.activiteitenlijst> dl = new List<SomerenModel.activiteitenlijst>();
 
-        //    public void addList(SomerenModel.activiteitenlijst d)
-        //    {
-        //        dl.Add(d);
-        //    }
+            public void addList(SomerenModel.activiteitenlijst d)
+            {
+                dl.Add(d);
+            }
 
-        //    public List<SomerenModel.activiteitenlijst> getList()
-        //    {
-        //        return dl;
-        //    }
-        //}
+            public List<SomerenModel.activiteitenlijst> getList()
+            {
+                return dl;
+            }
+        }
 
     }
 }

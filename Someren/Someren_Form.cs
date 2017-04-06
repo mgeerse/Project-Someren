@@ -155,12 +155,12 @@ namespace Someren
             this.panel1.Controls.Add(SomerenUI.showDrankvoorraad());
         }
 
-        //private void activiteitenlijstToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    this.panel1.Controls.Clear();
-        //    this.groupBox1.Text = "Activiteitenlijst";
-        //    this.panel1.Controls.Add(SomerenUI.showactiviteitenlijst());
+        private void activiteitenlijstToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            this.groupBox1.Text = "Activiteitenlijst";
+            this.panel1.Controls.Add(SomerenUI.showactiviteitenlijst());
 
-        //}
+        }
     }
 }

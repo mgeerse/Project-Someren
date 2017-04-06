@@ -139,37 +139,37 @@ namespace Someren
             return dranken_lijst;
         }
 
-        //public static List<SomerenModel.activiteitenlijst> DB_Getactiviteitenlijst()
-        //{
-        //    SqlConnection connection = openConnectieDB();
-        //    List<SomerenModel.activiteitenlijst> activiteiten_lijst = new List<SomerenModel.activiteitenlijst>();
+        public static List<SomerenModel.activiteitenlijst> DB_Getactiviteitenlijst()
+        {
+            SqlConnection connection = openConnectieDB();
+            List<SomerenModel.activiteitenlijst> activiteiten_lijst = new List<SomerenModel.activiteitenlijst>();
 
-        //    StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-        //    sb.Append("SELECT * FROM dbo.A5_Activiteit;");
+            sb.Append("SELECT * FROM dbo.A5_Activiteit;");
 
-        //    String sql = sb.ToString();
+            String sql = sb.ToString();
 
-        //    SqlCommand command = new SqlCommand(sql, connection);
-        //    command.Prepare();
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Prepare();
 
-        //    SqlDataReader reader = command.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        int ActiviteitID = reader.GetInt32(0);
-        //        string Omschrijving = reader.GetString(1);
-        //        int aantalStudenten = reader.GetInt32(2);
-        //        int aantalBegeleiders = reader.GetInt32(3);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int ActiviteitID = reader.GetInt32(0);
+                string Omschrijving = reader.GetString(1);
+                int aantalStudenten = reader.GetInt32(2);
+                int aantalBegeleiders = reader.GetInt32(3);
 
-        //        SomerenModel.activiteitenlijst activiteitenlijst = new SomerenModel.activiteitenlijst();
-        //        activiteitenlijst.setId(ActiviteitID);
-        //        activiteitenlijst.setOmschrijving(Omschrijving);
-        //        activiteitenlijst.setaantalStudenten(aantalStudenten);
-        //        activiteitenlijst.setaantalBegeleiders(aantalBegeleiders);
-        //        activiteiten_lijst.Add(activiteitenlijst);
-        //    }
+                SomerenModel.activiteitenlijst activiteitenlijst = new SomerenModel.activiteitenlijst();
+                activiteitenlijst.setId(ActiviteitID);
+                activiteitenlijst.setOmschrijving(Omschrijving);
+                activiteitenlijst.setaantalStudenten(aantalStudenten);
+                activiteitenlijst.setaantalBegeleiders(aantalBegeleiders);
+                activiteiten_lijst.Add(activiteitenlijst);
+            }
 
-        //    return activiteiten_lijst;
-        //}
+            return activiteiten_lijst;
+        }
     }
 }
